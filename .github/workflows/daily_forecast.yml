@@ -1,0 +1,40 @@
+name: Daily Forecast
+
+on:
+  schedule:
+    # 7am UTC every weekday = 7am GMT (winter) / 8am BST (summer)
+    - cron: '0 7 * * 1-5'
+  workflow_dispatch:   # lets you press "Run workflow" manually any time
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # needed to commit the HTML back to the repo
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Generate forecast
+        env:
+          JIRA_BASE_URL:   ${{ secrets.JIRA_BASE_URL }}
+          JIRA_EMAIL:      ${{ secrets.JIRA_EMAIL }}
+          JIRA_API_TOKEN:  ${{ secrets.JIRA_API_TOKEN }}
+        run: python generate_forecast.py
+
+      - name: Commit and push updated forecast
+        run: |
+          git config user.email "actions@github.com"
+          git config user.name  "GitHub Actions"
+          git add wysiwyg_forecast.html forecast_state.json
+          git diff --staged --quiet || git commit -m "Forecast update $(date +%Y-%m-%d)"
+          git push
