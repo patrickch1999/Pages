@@ -28,8 +28,8 @@ jobs:
         env:
           JIRA_BASE_URL:   ${{ secrets.JIRA_BASE_URL }}
           JIRA_EMAIL:      ${{ secrets.JIRA_EMAIL }}
-          JIRA_API_TOKEN:  ${{ secrets.JIRA_API_TOKEN }}
-        run: python generate_forecast.py
+          JIRA_API_TOKEN:  ${{ secrets.JIRA_API_TOKEN}}
+        run: python generate_forecasts.py
 
       - name: Commit and push updated forecast
         run: |
