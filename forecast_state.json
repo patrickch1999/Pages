@@ -1,0 +1,143 @@
+{
+  "run_date": "2026-03-31",
+  "tasks": {
+    "MWIP-886": {
+      "summary": "Implement JWT-based authentication via new ID/MFA service",
+      "assignee": "Geoffrey Viljoen",
+      "status": "In Progress",
+      "estimate_secs": 86400
+    },
+    "MWIP-887": {
+      "summary": "Update tracking script to bootstrap editor runtime",
+      "assignee": "Damian Dawber",
+      "status": "Backlog",
+      "estimate_secs": 14400
+    },
+    "MWIP-888": {
+      "summary": "Implement comms iframe and postMessage API framework",
+      "assignee": "Harry Pegrum",
+      "status": "Backlog",
+      "estimate_secs": 43200
+    },
+    "MWIP-889": {
+      "summary": "Build editor UI shell with base layout and regions",
+      "assignee": "Harry Pegrum",
+      "status": "QA / UAT",
+      "estimate_secs": 57600
+    },
+    "MWIP-890": {
+      "summary": "Develop iframe-based runtime for site takeover and pristine page copies",
+      "assignee": "Geoffrey Viljoen",
+      "status": "Ready for Development",
+      "estimate_secs": 115200
+    },
+    "MWIP-891": {
+      "summary": "Enable visual element selection for in-situ placement",
+      "assignee": "Harry Pegrum",
+      "status": "QA / UAT",
+      "estimate_secs": 57600
+    },
+    "MWIP-893": {
+      "summary": "Render experience output (HTML/CSS/JS) in situ via runtime and comms iframe",
+      "assignee": "Harry Pegrum",
+      "status": "Backlog",
+      "estimate_secs": 144000
+    },
+    "MWIP-967": {
+      "summary": "Change management of elements",
+      "assignee": "Harry Pegrum",
+      "status": "In Progress",
+      "estimate_secs": 172800
+    },
+    "MWIP-968": {
+      "summary": "Integrate widgets into editor shell",
+      "assignee": "Harry Pegrum",
+      "status": "Backlog",
+      "estimate_secs": 115200
+    },
+    "MWIP-969": {
+      "summary": "Supporting onsite previews for saved experience",
+      "assignee": "Harry Pegrum",
+      "status": "Backlog",
+      "estimate_secs": 57600
+    },
+    "MWIP-972": {
+      "summary": "Testing and migration",
+      "assignee": "Unassigned",
+      "status": "Backlog",
+      "estimate_secs": 144000
+    },
+    "MWIP-952": {
+      "summary": "New \"Template/Widget Library Management\" section in platform",
+      "assignee": "Damon Kreft",
+      "status": "WONT DO",
+      "estimate_secs": null
+    },
+    "MWIP-953": {
+      "summary": "New \"Template/Widget Library Management\" section in platform",
+      "assignee": "Damon Kreft",
+      "status": "QA / UAT",
+      "estimate_secs": 28800
+    },
+    "MWIP-954": {
+      "summary": "Form Builder Framework & UI",
+      "assignee": "Damon Kreft",
+      "status": "QA / UAT",
+      "estimate_secs": 230400
+    },
+    "MWIP-955": {
+      "summary": "Basic CRUD for creating a collection of templates",
+      "assignee": "Damon Kreft",
+      "status": "QA / UAT",
+      "estimate_secs": 28800
+    },
+    "MWIP-956": {
+      "summary": "HTML Editor",
+      "assignee": "Damon Kreft",
+      "status": "In Review",
+      "estimate_secs": 57600
+    },
+    "MWIP-957": {
+      "summary": "Template/Widget Preview",
+      "assignee": "Damon Kreft",
+      "status": "In Review",
+      "estimate_secs": 28800
+    },
+    "MWIP-958": {
+      "summary": "CSS Editor",
+      "assignee": "Damon Kreft",
+      "status": "Backlog",
+      "estimate_secs": 57600
+    },
+    "MWIP-959": {
+      "summary": "JavaScript Editor",
+      "assignee": "Damon Kreft",
+      "status": "Backlog",
+      "estimate_secs": 57600
+    },
+    "MWIP-960": {
+      "summary": "Extend Form Builder Framework's form element library",
+      "assignee": "Damon Kreft",
+      "status": "Backlog",
+      "estimate_secs": 57600
+    },
+    "MWIP-961": {
+      "summary": "WYSIWYG Widget Selector Component",
+      "assignee": "Damon Kreft",
+      "status": "In Review",
+      "estimate_secs": 28800
+    },
+    "MWIP-962": {
+      "summary": "WYSIWYG Editor Component",
+      "assignee": "Damon Kreft",
+      "status": "In Progress",
+      "estimate_secs": 28800
+    },
+    "MWIP-971": {
+      "summary": "Mechanism for editing live campaigns in \u201cdraft mode\u201d",
+      "assignee": "Unassigned",
+      "status": "Backlog",
+      "estimate_secs": 115200
+    }
+  }
+}
