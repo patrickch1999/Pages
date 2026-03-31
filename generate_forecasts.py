@@ -83,7 +83,6 @@ if TODAY in BANK_HOLIDAYS:
 
 # ── Fetch Jira ─────────────────────────────────────────────────────────────────
 def jira_search(jql):
-    def jira_search(jql):
     url     = f"{JIRA_BASE}/rest/api/3/search/jql"
     payload = {
         "jql": jql,
