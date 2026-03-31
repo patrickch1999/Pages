@@ -12,7 +12,6 @@ try:
     import requests
 except ImportError:
     sys.exit("Missing 'requests'. Run: pip install requests")
-
 # ── Jira credentials (from environment / GitHub Secrets) ──────────────────────
 JIRA_BASE  = os.environ.get("JIRA_BASE_URL", "https://madewithintent.atlassian.net")
 JIRA_EMAIL = os.environ.get("JIRA_EMAIL", "")
@@ -84,13 +83,17 @@ if TODAY in BANK_HOLIDAYS:
 
 # ── Fetch Jira ─────────────────────────────────────────────────────────────────
 def jira_search(jql):
-    url    = f"{JIRA_BASE}/rest/api/3/search"
-    fields = "summary,assignee,status,timeoriginalestimate"
-    params = {"jql": jql, "fields": fields, "maxResults": 100}
-    r = requests.get(url, headers=HEADERS, params=params, timeout=30)
+    def jira_search(jql):
+    url     = f"{JIRA_BASE}/rest/api/3/search/jql"
+    payload = {
+        "jql": jql,
+        "fields": ["summary", "assignee", "status", "timeoriginalestimate"],
+        "maxResults": 100,
+    }
+    r = requests.post(url, headers={**HEADERS, "Content-Type": "application/json"},
+                      json=payload, timeout=30)
     r.raise_for_status()
     return r.json()["issues"]
-
 print("Fetching Jira data…")
 raw884 = jira_search("parent = MWIP-884 ORDER BY created ASC")
 raw903 = jira_search("parent = MWIP-903 ORDER BY created ASC")
