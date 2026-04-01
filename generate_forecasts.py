@@ -82,11 +82,17 @@ if TODAY in BANK_HOLIDAYS:
     sys.exit(0)
 
 # ── Fetch Jira ─────────────────────────────────────────────────────────────────
+def parse_jira_date(s):
+    """Parse a Jira ISO timestamp like '2026-03-25T09:15:00.000+0000' → date."""
+    if not s: return None
+    try:    return date.fromisoformat(s[:10])
+    except: return None
+
 def jira_search(jql):
     url     = f"{JIRA_BASE}/rest/api/3/search/jql"
     payload = {
         "jql": jql,
-        "fields": ["summary", "assignee", "status", "timeoriginalestimate"],
+        "fields": ["summary", "assignee", "status", "timeoriginalestimate", "statuscategorychangedate"],
         "maxResults": 100,
     }
     r = requests.post(url, headers={**HEADERS, "Content-Type": "application/json"},
@@ -100,15 +106,22 @@ print(f"  884: {len(raw884)} tasks, 903: {len(raw903)} tasks")
 
 def parse_task(issue, epic):
     f = issue["fields"]
+    status_name = f["status"]["name"]
+    in_progress_since = None
+    if status_name == "In Progress":
+        in_progress_since = parse_jira_date(f.get("statuscategorychangedate"))
+        if in_progress_since and in_progress_since >= TODAY:
+            in_progress_since = None
     return {
-        "key":           issue["key"],
-        "summary":       f.get("summary", ""),
-        "assignee":      f["assignee"]["displayName"] if f.get("assignee") else None,
-        "status":        f["status"]["name"],
-        "estimate_secs": f.get("timeoriginalestimate"),
-        "epic":          epic,
-        "blockedUntil903": issue["key"] == "MWIP-968",
-        "finalStage":      issue["key"] == "MWIP-972",
+        "key":               issue["key"],
+        "summary":           f.get("summary", ""),
+        "assignee":          f["assignee"]["displayName"] if f.get("assignee") else None,
+        "status":            status_name,
+        "estimate_secs":     f.get("timeoriginalestimate"),
+        "in_progress_since": in_progress_since,
+        "epic":              epic,
+        "blockedUntil903":   issue["key"] == "MWIP-968",
+        "finalStage":        issue["key"] == "MWIP-972",
         "excluded_by_request": issue["key"] in EXCLUDED_KEYS,
     }
 
@@ -128,6 +141,7 @@ for i in raw884:
             "assignee": f["assignee"]["displayName"] if f.get("assignee") else None,
             "status": f["status"]["name"],
             "estimate_secs": f.get("timeoriginalestimate"),
+            "in_progress_since": None,
             "epic": "884",
             "excluded_by_request": True,
             "blockedUntil903": False, "finalStage": False,
@@ -180,7 +194,10 @@ def compute_schedule(tol=False):
     def edays(v):
         if not v["estimate_secs"]: return 1
         d = v["estimate_secs"] / 28800.0
-        if tol and v["status"] != "In Progress" and v["status"] not in EXCL_STATUSES:
+        if v["status"] == "In Progress" and v.get("in_progress_since"):
+            days_worked = wds_remaining(v["in_progress_since"], TODAY - timedelta(1))
+            d = max(d - days_worked, 0.5)
+        elif tol and v["status"] not in EXCL_STATUSES:
             d *= 1.2
         return d
 
