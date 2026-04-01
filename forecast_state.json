@@ -4,7 +4,7 @@
     "MWIP-886": {
       "summary": "Implement JWT-based authentication via new ID/MFA service",
       "assignee": "Geoffrey Viljoen",
-      "status": "In Progress",
+      "status": "In Review",
       "estimate_secs": 86400
     },
     "MWIP-887": {
@@ -28,7 +28,7 @@
     "MWIP-890": {
       "summary": "Develop iframe-based runtime for site takeover and pristine page copies",
       "assignee": "Geoffrey Viljoen",
-      "status": "Ready for Development",
+      "status": "In Progress",
       "estimate_secs": 115200
     },
     "MWIP-891": {
