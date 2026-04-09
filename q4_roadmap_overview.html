@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Q4 2026 Roadmap — Theme Overview</title>
+<style>
+  :root {
+    --bg:        #0d1117;
+    --surface:   #161b22;
+    --surface2:  #1c2330;
+    --border:    #30363d;
+    --border2:   #21262d;
+    --text:      #e6edf3;
+    --muted:     #8b949e;
+    --dim:       #484f58;
+    --scoping:   #58a6ff;
+    --design:    #e3b341;
+    --impl:      #f78166;
+    --testing:   #bc8cff;
+    --rollout:   #3fb950;
+    --today:     #f0883e;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+    font-size: 13px;
+    padding: 32px 40px;
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  .page-header {
+    margin-bottom: 28px;
+  }
+  .page-header h1 {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+    margin-bottom: 5px;
+  }
+  .page-header p {
+    color: var(--muted);
+    font-size: 12.5px;
+  }
+
+  /* ── Stat cards ── */
+  .stat-strip {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .stat {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .stat-label {
+    font-size: 10.5px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    margin-bottom: 5px;
+  }
+  .stat-value {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 3px;
+  }
+  .stat-sub {
+    font-size: 10.5px;
+    color: var(--muted);
+  }
+
+  /* ── Legend ── */
+  .legend {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .legend-swatch {
+    width: 28px;
+    height: 10px;
+    border-radius: 2px;
+  }
+  .legend-today {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    color: var(--today);
+    margin-left: auto;
+  }
+  .legend-today-line {
+    width: 2px;
+    height: 14px;
+    background: var(--today);
+    border-radius: 1px;
+  }
+
+  /* ── Chart wrapper ── */
+  .chart-shell {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  /* ── Column headers: Theme label + 3 months ── */
+  .col-header {
+    display: grid;
+    grid-template-columns: 210px 1fr;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface2);
+  }
+  .col-theme-label {
+    padding: 11px 16px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-right: 1px solid var(--border);
+  }
+  .col-months {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .col-month {
+    padding: 11px 0;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-right: 1px solid var(--border);
+  }
+  .col-month:last-child { border-right: none; }
+
+  /* ── Week sub-row ── */
+  .weeks-row {
+    display: grid;
+    grid-template-columns: 210px 1fr;
+    border-bottom: 1px solid var(--border2);
+    background: var(--surface2);
+  }
+  .weeks-spacer { border-right: 1px solid var(--border); }
+  .weeks-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+  }
+  .week-cell {
+    padding: 5px 0;
+    text-align: center;
+    font-size: 9.5px;
+    color: var(--dim);
+    border-right: 1px solid var(--border2));
+  }
+  .week-cell:last-child { border-right: none; }
+  .week-cell.is-today { color: var(--today); font-weight: 600; }
+
+  /* ── Theme rows ── */
+  .theme-block {
+    display: grid;
+    grid-template-columns: 210px 1fr;
+    border-bottom: 1px solid var(--border);
+  }
+  .theme-block:last-child { border-bottom: none; }
+  .theme-block:hover { background: rgba(255,255,255,0.015); }
+
+  .theme-meta {
+    padding: 16px;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+  }
+  .theme-number {
+    font-size: 10px;
+    color: var(--dim);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    margin-bottom: 1px;
+  }
+  .theme-name {
+    font-weight: 600;
+    font-size: 13.5px;
+    color: var(--text);
+    line-height: 1.3;
+  }
+  .theme-owners {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  /* ── Gantt panel ── */
+  .gantt-panel {
+    position: relative;
+    padding: 14px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  /* Background week grid lines */
+  .gantt-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent calc(100%/12 - 1px),
+      var(--border2) calc(100%/12 - 1px),
+      var(--border2) calc(100%/12)
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Month separator lines at 33.33% and 66.67% */
+  .gantt-panel::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(90deg, transparent calc(33.333% - 1px), var(--border) calc(33.333% - 1px), var(--border) calc(33.333%), transparent calc(33.333%)),
+      linear-gradient(90deg, transparent calc(66.666% - 1px), var(--border) calc(66.666% - 1px), var(--border) calc(66.666%), transparent calc(66.666%));
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── Phase bar row ── */
+  .phase-row {
+    position: relative;
+    height: 20px;
+    z-index: 1;
+  }
+
+  .phase-bar {
+    position: absolute;
+    height: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+
+  .phase-bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0.18;
+    border-radius: 4px;
+  }
+
+  .phase-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    opacity: 0.85;
+    border-radius: 4px 0 0 4px;
+    transition: width 0.3s ease;
+  }
+  .phase-fill.full { border-radius: 4px; }
+
+  .phase-text {
+    position: absolute;
+    left: 7px;
+    font-size: 10px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.9);
+    white-space: nowrap;
+    z-index: 2;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+    pointer-events: none;
+  }
+
+  .phase-pct {
+    position: absolute;
+    right: 6px;
+    font-size: 9.5px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.7);
+    z-index: 2;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+    pointer-events: none;
+  }
+
+  /* ── Done / completed phase variant ── */
+  .phase-bar.is-done .phase-bg        { opacity: 0.55; }
+  .phase-bar.is-done .phase-fill      { opacity: 0; }
+  .phase-bar.is-done .phase-text      { font-weight: 700; }
+
+  /* ── Risk / definition phase (striped) ── */
+  .phase-bar.is-risk .phase-bg {
+    opacity: 1;
+    background-image: repeating-linear-gradient(
+      -45deg,
+      rgba(217,119,6,0.22) 0px, rgba(217,119,6,0.22) 5px,
+      rgba(0,0,0,0)        5px, rgba(0,0,0,0)        10px
+    );
+    background-color: transparent;
+  }
+  .phase-bar.is-risk .phase-fill { background: #d97706; opacity: 0.7; }
+
+  /* ── Workstream bars (Model Retraining) ── */
+  .workstream-bar { cursor: default; }
+
+  /* ── Sprint blocks ── */
+  .sprint-row {
+    position: relative;
+    height: 26px;
+    z-index: 1;
+    margin: 4px 0;
+  }
+  .sprint-block {
+    position: absolute;
+    height: 100%;
+    border-radius: 4px;
+    background: #4fc3f7;
+    opacity: 0.75;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* 3px gap each side */
+    box-sizing: border-box;
+  }
+  .sprint-label {
+    font-size: 10.5px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.95);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  /* ── Hover: fade sibling themes ── */
+  .theme-block { cursor: pointer; }
+  .theme-wrapper { transition: opacity 0.2s ease; }
+  #themeRows:has(.theme-wrapper:hover) .theme-wrapper       { opacity: 0.2; }
+  #themeRows:has(.theme-wrapper:hover) .theme-wrapper:hover { opacity: 1; }
+
+  /* ── Expand arrow ── */
+  .expand-arrow {
+    font-size: 9px;
+    color: var(--dim);
+    margin-top: 5px;
+    transition: transform 0.25s ease;
+    display: inline-block;
+  }
+  .theme-block.is-expanded .expand-arrow { transform: rotate(180deg); }
+
+  /* ── Expand panel ── */
+  .expand-panel {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    background: #0a0e14;
+  }
+  .expand-panel.open { max-height: 700px; }
+  .expand-inner {
+    display: grid;
+    grid-template-columns: 210px 1fr;
+    border-top: 1px solid var(--border2);
+  }
+  .expand-left {
+    padding: 14px 16px;
+    border-right: 1px solid var(--border);
+    font-size: 10.5px;
+    color: var(--dim);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+  .expand-right { padding: 16px 20px 20px; }
+  .expand-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.65;
+    margin-bottom: 8px;
+  }
+  .expand-link {
+    display: inline-block;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: #58a6ff;
+    text-decoration: none;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border2);
+    width: 100%;
+  }
+  .expand-link:hover { text-decoration: underline; color: #79b8ff; }
+  .expand-initiatives { display: flex; flex-direction: column; gap: 10px; }
+  .initiative-item {}
+  .initiative-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+  .initiative-detail {
+    font-size: 11.5px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+  .initiative-badge {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 1px 7px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 600;
+    background: rgba(63,185,80,0.15);
+    color: #3fb950;
+    border: 1px solid rgba(63,185,80,0.3);
+    vertical-align: middle;
+    letter-spacing: 0.2px;
+  }
+
+  /* ── Today line (inside each gantt panel) ── */
+  .today-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--today);
+    z-index: 10;
+    pointer-events: none;
+  }
+  .today-dot {
+    position: absolute;
+    top: -1px;
+    left: -3px;
+    width: 8px;
+    height: 8px;
+    background: var(--today);
+    border-radius: 50%;
+  }
+
+  /* ── Footer ── */
+  footer {
+    margin-top: 20px;
+    color: var(--dim);
+    font-size: 11px;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<!-- ── Page header ── -->
+<div class="page-header">
+  <h1>Q4 2026 Product Roadmap — Theme Overview</h1>
+  <p>April – June 2026 &nbsp;·&nbsp; Theme: Refinement, Polish and Maturity &nbsp;·&nbsp; Run date: 9 Apr 2026</p>
+</div>
+
+<!-- ── Stat strip ── -->
+<div class="stat-strip">
+  <div class="stat">
+    <div class="stat-label">Themes</div>
+    <div class="stat-value" style="color:#58a6ff">6</div>
+    <div class="stat-sub">Active this quarter</div>
+  </div>
+  <div class="stat">
+    <div class="stat-label">Quarter</div>
+    <div class="stat-value" style="color:var(--text)">Q4</div>
+    <div class="stat-sub">Apr – Jun 2026</div>
+  </div>
+  <div class="stat">
+    <div class="stat-label">Weeks elapsed</div>
+    <div class="stat-value" style="color:var(--today)">1</div>
+    <div class="stat-sub">of 12 total</div>
+  </div>
+<div class="stat">
+    <div class="stat-label">Key owners</div>
+    <div class="stat-value" style="color:var(--text); font-size:15px">8</div>
+    <div class="stat-sub">Across all themes</div>
+  </div>
+  <div class="stat">
+    <div class="stat-label">WYSIWYG forecast</div>
+    <div class="stat-value" style="color:#3fb950; font-size:15px">8 May</div>
+    <div class="stat-sub">Baseline completion</div>
+  </div>
+</div>
+
+<!-- ── Legend ── -->
+<div class="legend">
+  <div class="legend-item">
+    <div class="legend-swatch" style="background:var(--scoping)"></div>
+    Scoping
+  </div>
+  <div class="legend-item">
+    <div class="legend-swatch" style="background:var(--design)"></div>
+    Design
+  </div>
+  <div class="legend-item">
+    <div class="legend-swatch" style="background:#d97706; opacity:0.8"></div>
+    ⚠ Definition (blocker)
+  </div>
+  <div class="legend-item">
+    <div class="legend-swatch" style="background:var(--impl)"></div>
+    Implementation
+  </div>
+  <div class="legend-item">
+    <div class="legend-swatch" style="background:var(--testing)"></div>
+    Testing
+  </div>
+  <div class="legend-item">
+    <div class="legend-swatch" style="background:var(--rollout)"></div>
+    Rollout
+  </div>
+  <div class="legend-today">
+    <div class="legend-today-line"></div>
+    Today · 9 Apr
+  </div>
+</div>
+
+<!-- ── Chart ── -->
+<div class="chart-shell">
+
+  <!-- Month headers -->
+  <div class="col-header">
+    <div class="col-theme-label">Theme</div>
+    <div class="col-months">
+      <div class="col-month">April</div>
+      <div class="col-month">May</div>
+      <div class="col-month">June</div>
+    </div>
+  </div>
+
+  <!-- Week labels -->
+  <div class="weeks-row">
+    <div class="weeks-spacer"></div>
+    <div class="weeks-grid" id="weeksGrid"></div>
+  </div>
+
+  <!-- Theme rows (injected by JS) -->
+  <div id="themeRows"></div>
+
+</div>
+
+<footer>
+  Generated: Thursday 9 April 2026 &nbsp;·&nbsp; Phase progress reflects current estimates based on Jira / Notion data &nbsp;·&nbsp; For detail on WYSIWYG epic, see the Epic Forecast
+</footer>
+
+<script>
+  // ── Config ──────────────────────────────────────────────────────────────
+  // Quarter: 12 weeks, Apr 7 – Jun 27 2026
+  // Today = Wed 9 Apr = day 3 of 5 in week 1 → (0 + 3/5) / 12 * 100 = 5.0%
+  const TODAY_PCT = 5.0; // % across the full 12-week timeline
+
+  const PHASES = {
+    scoping:        { label: 'Scoping',        color: '#58a6ff' },
+    design:         { label: 'Design',         color: '#e3b341' },
+    definition:     { label: '⚠ Definition',   color: '#d97706', risk: true },
+    implementation: { label: 'Implementation', color: '#f78166' },
+    testing:        { label: 'Testing',        color: '#bc8cff' },
+    rollout:        { label: 'Rollout',        color: '#3fb950' },
+  };
+
+  // Weeks: 12 total, 4 per month
+  const WEEKS = [
+    { label: '7 Apr',  today: true  },
+    { label: '14 Apr', today: false },
+    { label: '21 Apr', today: false },
+    { label: '28 Apr', today: false },
+    { label: '5 May',  today: false },
+    { label: '12 May', today: false },
+    { label: '19 May', today: false },
+    { label: '26 May', today: false },
+    { label: '2 Jun',  today: false },
+    { label: '9 Jun',  today: false },
+    { label: '16 Jun', today: false },
+    { label: '23 Jun', today: false },
+  ];
+
+  const THEMES = [
+    {
+      number: 'Theme 1',
+      name: 'WYSIWYG',
+      owners: 'Harry Pegrum · Damon Kreft',
+      description: 'Introducing the WYSIWYG editor into campaign creation — starting with visual editing and moving towards prompt-based changes, server-side decisioning and flexible goals. Customers are asking for the features they use in other tools; Q4 delivers that.',
+      link: { label: 'View detailed epic forecast →', url: 'https://patrickch1999.github.io/Pages/wysiwyg_forecast.html' },
+      initiatives: [
+        { name: 'WYSIWYG MVP',                 detail: 'First iteration of our visual editor to reach meaningful feature completeness for non-developer users.' },
+        { name: 'Prompt-Based Editing',        detail: 'Exploring 3rd party tech (CODI) to provide a proof of concept for prompt-based development directly within the editor.' },
+        { name: 'Mobile Preview & QR Code',   detail: 'Resize preview to mobile dimensions and generate a QR code for on-device testing. Driven by direct customer feedback.' },
+      ],
+      phases: [
+        { type: 'scoping',        start: 1, end: 1,  done: true },
+        { type: 'implementation', start: 1, end: 5  },
+        { type: 'testing',        start: 4, end: 6  },
+        { type: 'rollout',        start: 7, end: 8  },
+      ]
+    },
+    {
+      number: 'Theme 2',
+      name: 'Agentic Campaign Improvements',
+      owners: 'Damian · Geoff · Tom',
+      description: 'Build on the Agentic Campaigns launch. Expand strategy options, surface the comparative value of agentic versus standard campaigns, and maintain a regular improvement cycle throughout Q4.',
+      initiatives: [
+        { name: 'Custom Strategy Builder · In QA', detail: 'Allows customers to build and save their own custom strategies for reuse across campaigns, beyond the six predefined options.' },
+        { name: 'Biweekly Sprints',           detail: 'Dedicated capacity every two weeks to address customer-reported issues and feedback on Agentic Campaigns throughout Q4.' },
+        { name: 'Notifications & Recommendations', detail: 'Notify customers when a campaign moves from Exploration to Optimisation phase. Surface a list of agent recommendations from the campaign overview.' },
+        { name: 'Strategy Expansion',         detail: 'Adds more strategies to the existing library, giving customers a broader range of starting points and reducing the need to build from scratch.' },
+        { name: 'Agentic Value Reporting',    detail: 'Dedicated reporting on the performance differential between Agentic and standard campaigns — efficiency gains, uplift comparison, and revenue contribution.' },
+      ],
+      sprints: [
+        { label: 'Sprint 1', start: 1,  end: 2  },
+        { label: 'Sprint 2', start: 3,  end: 4  },
+        { label: 'Sprint 3', start: 5,  end: 6  },
+        { label: 'Sprint 4', start: 7,  end: 8  },
+        { label: 'Sprint 5', start: 9,  end: 10 },
+        { label: 'Sprint 6', start: 11, end: 12 },
+      ]
+    },
+    {
+      number: 'Theme 3',
+      name: 'Model Retraining',
+      owners: 'Tom',
+      description: 'A structured retraining cycle with a clear goal: make the model more commercially useful, not just marginally more accurate. Three parallel workstreams, each with a distinct strategic outcome. The training dataset is largely prepared.',
+      workstreams: [
+        { label: 'New Feature Inputs',        start: 1, end: 12, color: '#60a5fa', detail: 'Adds three new signals: site performance (page speed, TTFB), social proof percentile, and a bot detection metric replacing the deprecated XP signal. Bot detection classifies human vs bot/crawler traffic in real time.' },
+        { label: 'Generic Engagement Model',  start: 1, end: 12, color: '#818cf8', detail: 'Explores a vertical-agnostic model trained on engagement signals (scroll, click, dwell, session progression) rather than conversion events — to serve non-eCommerce verticals such as publishing, property and SaaS.' },
+        { label: 'Bespoke Client Models',     start: 1, end: 12, color: '#a78bfa', detail: 'Infrastructure to offer enterprise clients a model fine-tuned on their own data as an MRR add-on (~£3–5k/month). The base model is ~5MB — hundreds of client variants can sit in the inference system at negligible cost.' },
+      ]
+    },
+    {
+      number: 'Theme 4',
+      name: 'Metabase Integration',
+      owners: 'Mat · Damian',
+      description: 'Establish Metabase as a deeply linked analytics layer accessible from key points across the product. The engineering work is close to ready; the outstanding risk is definitional — dashboards cannot ship empty, and defining what the reports should contain has not yet been completed.',
+      initiatives: [
+        { name: 'Metabase Deep Links',         detail: 'From any segment in the library, one click to a Metabase report scoped to that segment. No manual reconfiguration. This is the primary Q4 deliverable for this theme.' },
+        { name: 'Campaign → Metabase Deep Dive', detail: 'A \'View full breakdown in Metabase\' entry point from campaign reporting, linking directly to a pre-scoped campaign dashboard.' },
+        { name: 'Metabase Validation',         detail: 'With Metabase live for internal users, Q4 validates which data and dashboard formats are most valuable before opening to customers. Co-building with a small group to test assumptions.' },
+        { name: 'Gating (Paid Tier)',          detail: 'Every user who views a Metabase component counts against the licence at $10/user/month. The group aligned on gating embedded Metabase behind a paid tier rather than making it universally available.' },
+      ],
+      phases: [
+        { type: 'scoping',        start: 1, end: 4,  risk: true, label: '⚠ Scoping' },
+        { type: 'implementation', start: 5, end: 9  },
+        { type: 'testing',        start: 9, end: 11 },
+        { type: 'rollout',        start: 11, end: 12 },
+      ]
+    },
+    {
+      number: 'Theme 5',
+      name: 'UI Refresh',
+      owners: 'Bec · Damon · Harry',
+      description: 'Deliver the updated product UI by end of Q4 to provide the visual and architectural foundation for everything that follows in 2026. Hard target: new UI shipped and accessible to customers by end of June. This is the enabling dependency for the broader 2026 roadmap.',
+      initiatives: [
+        { name: 'Component Library Refresh',   detail: 'Updated typography scale, refined component set and improved colour system. Provides a scalable front-end foundation and a more polished product feel throughout.' },
+        { name: 'Value Visibility Surfaces',   detail: 'Revenue attributed to intent, campaign uplift and time saved through Agentic Campaigns surfaced throughout the product — reinforcing ROI without requiring customers to seek it out.' },
+        { name: 'Terminology & Copy Audit',    detail: 'Product-wide review of labels, tooltips and empty states. Replace technical or ambiguous language with clear, customer-facing copy. Documented as a living style guide.' },
+        { name: 'In-product Help',             detail: 'Contextual help tooltips and inline explainers at key decision points throughout the product.' },
+        { name: 'Metabase Access Points',      detail: 'Design and implement the surfaces within the new UI through which Metabase will be accessed, including entry points from campaign reporting and segment library views. Gating logic scoped here for Q1.' },
+      ],
+      phases: [
+        { type: 'design',         start: 1,  end: 4  },
+        { type: 'scoping',        start: 4,  end: 5  },
+        { type: 'implementation', start: 6,  end: 10 },
+        { type: 'testing',        start: 8,  end: 11 },
+        { type: 'rollout',        start: 11, end: 12 },
+      ]
+    },
+    {
+      number: 'Theme 6',
+      name: 'MCP Exploration',
+      owners: 'Joe',
+      description: 'Build out the MWI MCP server, enabling customers to query their Intent Insights data in natural language via Claude or any compatible AI agent — without navigating the dashboard. An MCP server is already deployed on AWS with auth, RBAC and property-level access controls.',
+      initiatives: [
+        { name: 'Account Summary',             detail: 'Health-check and performance snapshot. Rolling 7-day vs prior 7-day comparison across intent stage volumes, campaign health, data quality and a plain-English agent summary.' },
+        { name: 'Campaign Overview',           detail: 'Status and performance across all campaigns — live/draft/paused counts, Agentic vs Standard split, performance direction and confidence per live campaign. Flags campaigns warranting action.' },
+        { name: 'Standard Campaign Summary',   detail: 'Detailed report for a named campaign: global and segment-level CVR, RPU and uplift vs control with statistical confidence callout. Matches the in-app report format.' },
+        { name: 'Agentic Campaign Summary',    detail: 'Phase, segment win/loss counts, estimated uplift trend, days to confidence threshold and an agent interpretation of campaign health.' },
+        { name: 'P1: Weekly Trade Report',     detail: 'Pre-formatted intent summary for eCommerce trade meetings — intent stage breakdown, top 5 affinity movers, performance by marketing channel and landing page type, week-on-week.' },
+      ],
+      phases: [
+        { type: 'scoping',        start: 5,  end: 6  },
+        { type: 'implementation', start: 7,  end: 9  },
+        { type: 'testing',        start: 10, end: 11 },
+        { type: 'rollout',        start: 12, end: 12 },
+      ]
+    },
+  ];
+
+  // ── Render weeks ─────────────────────────────────────────────────────────
+  const weeksGrid = document.getElementById('weeksGrid');
+  WEEKS.forEach(w => {
+    const el = document.createElement('div');
+    el.className = 'week-cell' + (w.today ? ' is-today' : '');
+    el.textContent = w.label;
+    weeksGrid.appendChild(el);
+  });
+
+  // ── Render theme rows ─────────────────────────────────────────────────────
+  const container = document.getElementById('themeRows');
+
+  THEMES.forEach(theme => {
+    // Wrapper holds the visible row + the collapsible expand panel
+    const wrapper = document.createElement('div');
+    wrapper.className = 'theme-wrapper';
+
+    const block = document.createElement('div');
+    block.className = 'theme-block';
+
+    // Left meta column
+    const meta = document.createElement('div');
+    meta.className = 'theme-meta';
+    meta.innerHTML = `
+      <div class="theme-number">${theme.number}</div>
+      <div class="theme-name">${theme.name}</div>
+      <div class="theme-owners">${theme.owners}</div>
+      <div class="expand-arrow">▼</div>
+    `;
+
+    // Gantt panel
+    const panel = document.createElement('div');
+    panel.className = 'gantt-panel';
+
+    const todayLine = document.createElement('div');
+    todayLine.className = 'today-line';
+    todayLine.style.left = TODAY_PCT + '%';
+    todayLine.innerHTML = '<div class="today-dot"></div>';
+    panel.appendChild(todayLine);
+
+    // ── Render bars based on theme type ──
+    if (theme.sprints) {
+      const sprintRow = document.createElement('div');
+      sprintRow.className = 'sprint-row';
+      theme.sprints.forEach(sp => {
+        const leftPct  = (sp.start - 1) / 12 * 100;
+        const widthPct = (sp.end - sp.start + 1) / 12 * 100;
+        const blk = document.createElement('div');
+        blk.className = 'sprint-block';
+        blk.style.left  = `calc(${leftPct}% + 3px)`;
+        blk.style.width = `calc(${widthPct}% - 6px)`;
+        const lbl = document.createElement('span');
+        lbl.className = 'sprint-label';
+        lbl.textContent = sp.label;
+        blk.appendChild(lbl);
+        sprintRow.appendChild(blk);
+      });
+      panel.appendChild(sprintRow);
+
+    } else if (theme.workstreams) {
+      theme.workstreams.forEach(ws => {
+        const leftPct  = (ws.start - 1) / 12 * 100;
+        const widthPct = (ws.end - ws.start + 1) / 12 * 100;
+        const todayWithinBar = Math.max(0, Math.min(100, (TODAY_PCT - leftPct) / widthPct * 100));
+        const row = document.createElement('div');
+        row.className = 'phase-row';
+        const bar = document.createElement('div');
+        bar.className = 'phase-bar workstream-bar';
+        bar.style.left  = leftPct + '%';
+        bar.style.width = widthPct + '%';
+        const bg = document.createElement('div');
+        bg.className = 'phase-bg';
+        bg.style.background = ws.color;
+        bg.style.opacity = '0.22';
+        const fill = document.createElement('div');
+        fill.className = 'phase-fill';
+        fill.style.width      = todayWithinBar + '%';
+        fill.style.background = ws.color;
+        fill.style.opacity    = '0.75';
+        const lbl = document.createElement('div');
+        lbl.className = 'phase-text';
+        lbl.textContent = ws.label;
+        bar.appendChild(bg); bar.appendChild(fill); bar.appendChild(lbl);
+        row.appendChild(bar);
+        panel.appendChild(row);
+      });
+
+    } else {
+      theme.phases.forEach(ph => {
+        const cfg = PHASES[ph.type];
+        const leftPct  = (ph.start - 1) / 12 * 100;
+        const widthPct = (ph.end - ph.start + 1) / 12 * 100;
+        const todayWithinBar = widthPct > 0
+          ? Math.max(0, Math.min(100, (TODAY_PCT - leftPct) / widthPct * 100))
+          : 0;
+        const fillPct = ph.done ? 100 : todayWithinBar;
+        const row = document.createElement('div');
+        row.className = 'phase-row';
+        const bar = document.createElement('div');
+        const isRisk = ph.risk || cfg.risk;
+        bar.className = 'phase-bar' + (ph.done ? ' is-done' : '') + (isRisk ? ' is-risk' : '');
+        bar.style.left  = leftPct + '%';
+        bar.style.width = widthPct + '%';
+        bar.style.color = cfg.color;
+        const bg = document.createElement('div');
+        bg.className = 'phase-bg';
+        bg.style.background = cfg.color;
+        const fill = document.createElement('div');
+        fill.className = 'phase-fill' + (fillPct === 100 ? ' full' : '');
+        fill.style.width      = fillPct + '%';
+        fill.style.background = cfg.color;
+        const lbl = document.createElement('div');
+        lbl.className = 'phase-text';
+        const displayLabel = ph.label || cfg.label;
+        lbl.textContent = ph.done ? `✓ ${displayLabel}` : displayLabel;
+        bar.appendChild(bg); bar.appendChild(fill); bar.appendChild(lbl);
+        row.appendChild(bar);
+        panel.appendChild(row);
+      });
+    }
+
+    block.appendChild(meta);
+    block.appendChild(panel);
+
+    // ── Expand panel ──
+    const expandPanel = document.createElement('div');
+    expandPanel.className = 'expand-panel';
+
+    const inner = document.createElement('div');
+    inner.className = 'expand-inner';
+
+    const expandLeft = document.createElement('div');
+    expandLeft.className = 'expand-left';
+    expandLeft.textContent = 'Initiatives';
+
+    const expandRight = document.createElement('div');
+    expandRight.className = 'expand-right';
+
+    if (theme.description) {
+      const desc = document.createElement('p');
+      desc.className = 'expand-desc';
+      desc.textContent = theme.description;
+      expandRight.appendChild(desc);
+    }
+    if (theme.link) {
+      const a = document.createElement('a');
+      a.className = 'expand-link';
+      a.href = theme.link.url;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.textContent = theme.link.label;
+      expandRight.appendChild(a);
+    }
+
+    // Support both initiatives array and workstream detail
+    const items = theme.initiatives
+      || (theme.workstreams || []).map(w => ({ name: w.label, detail: w.detail }));
+
+    if (items && items.length) {
+      const list = document.createElement('div');
+      list.className = 'expand-initiatives';
+      items.forEach(ini => {
+        const item = document.createElement('div');
+        item.className = 'initiative-item';
+        const name = document.createElement('div');
+        name.className = 'initiative-name';
+        const nameParts = ini.name.split(' · ');
+        name.textContent = nameParts[0];
+        if (nameParts[1]) {
+          const badge = document.createElement('span');
+          badge.className = 'initiative-badge';
+          badge.textContent = nameParts[1];
+          name.appendChild(badge);
+        }
+        const detail = document.createElement('div');
+        detail.className = 'initiative-detail';
+        detail.textContent = ini.detail;
+        item.appendChild(name);
+        item.appendChild(detail);
+        list.appendChild(item);
+      });
+      expandRight.appendChild(list);
+    }
+
+    inner.appendChild(expandLeft);
+    inner.appendChild(expandRight);
+    expandPanel.appendChild(inner);
+
+    // Toggle on click
+    block.addEventListener('click', () => {
+      const isOpen = expandPanel.classList.toggle('open');
+      block.classList.toggle('is-expanded', isOpen);
+    });
+
+    wrapper.appendChild(block);
+    wrapper.appendChild(expandPanel);
+    container.appendChild(wrapper);
+  });
+</script>
+</body>
+</html>
