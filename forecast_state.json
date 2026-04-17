@@ -1,5 +1,5 @@
 {
-  "run_date": "2026-04-16",
+  "run_date": "2026-04-17",
   "tasks": {
     "MWIP-886": {
       "summary": "Implement JWT-based authentication via new ID/MFA service",
@@ -131,7 +131,7 @@
       "summary": "WYSIWYG Editor Component",
       "assignee": "Damon Kreft",
       "status": "Backlog",
-      "estimate_secs": 28800
+      "estimate_secs": 86400
     },
     "MWIP-971": {
       "summary": "Mechanism for editing live campaigns in \u201cdraft mode\u201d",
