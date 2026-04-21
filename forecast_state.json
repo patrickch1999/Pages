@@ -1,5 +1,5 @@
 {
-  "run_date": "2026-04-20",
+  "run_date": "2026-04-21",
   "tasks": {
     "MWIP-886": {
       "summary": "Implement JWT-based authentication via new ID/MFA service",
@@ -40,7 +40,7 @@
     "MWIP-893": {
       "summary": "Render experience output (HTML/CSS/JS) in situ via runtime and comms iframe",
       "assignee": "Harry Pegrum",
-      "status": "Backlog",
+      "status": "Ready for Development",
       "estimate_secs": 144000
     },
     "MWIP-967": {
