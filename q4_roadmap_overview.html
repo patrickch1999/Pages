@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Q4 2026 Roadmap — Theme Overview</title>
+<title>Q4 2026 Roadmap - Theme Overview</title>
 <style>
   :root {
     --bg:        #0d1117;
@@ -464,13 +464,44 @@
     font-size: 11px;
     text-align: center;
   }
+
+  /* ── Locked theme overlay ── */
+  .gantt-locked-wrapper {
+    position: relative;
+  }
+  .gantt-locked-wrapper .gantt-panel {
+    filter: blur(3px);
+    opacity: 0.4;
+    pointer-events: none;
+    user-select: none;
+  }
+  .locked-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    z-index: 20;
+  }
+  .locked-icon {
+    font-size: 18px;
+    opacity: 0.7;
+  }
+  .locked-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.3px;
+  }
 </style>
 </head>
 <body>
 
 <!-- ── Page header ── -->
 <div class="page-header">
-  <h1>Q4 2026 Product Roadmap — Theme Overview</h1>
+  <h1>Q4 2026 Product Roadmap - Theme Overview</h1>
   <p>April – June 2026 &nbsp;·&nbsp; Theme: Refinement, Polish and Maturity &nbsp;·&nbsp; Run date: 9 Apr 2026</p>
 </div>
 
@@ -488,7 +519,7 @@
   </div>
   <div class="stat">
     <div class="stat-label">Weeks elapsed</div>
-    <div class="stat-value" style="color:var(--today)">1</div>
+    <div class="stat-value" style="color:var(--today)" id="weeksElapsedVal">-</div>
     <div class="stat-sub">of 12 total</div>
   </div>
 <div class="stat">
@@ -498,7 +529,7 @@
   </div>
   <div class="stat">
     <div class="stat-label">WYSIWYG forecast</div>
-    <div class="stat-value" style="color:#3fb950; font-size:15px">8 May</div>
+    <div class="stat-value" style="color:#3fb950; font-size:15px">13 May</div>
     <div class="stat-sub">Baseline completion</div>
   </div>
 </div>
@@ -531,7 +562,7 @@
   </div>
   <div class="legend-today">
     <div class="legend-today-line"></div>
-    Today · 9 Apr
+    <span id="legendTodayText">Today</span>
   </div>
 </div>
 
@@ -566,8 +597,20 @@
 <script>
   // ── Config ──────────────────────────────────────────────────────────────
   // Quarter: 12 weeks, Apr 7 – Jun 27 2026
-  // Today = Wed 9 Apr = day 3 of 5 in week 1 → (0 + 3/5) / 12 * 100 = 5.0%
-  const TODAY_PCT = 5.0; // % across the full 12-week timeline
+  const QUARTER_START = new Date(2026, 3, 7); // Apr 7 2026
+  const MS_PER_WEEK   = 7 * 24 * 60 * 60 * 1000;
+  const TOTAL_WEEKS   = 12;
+  const _now          = new Date();
+  const _elapsedMs    = Math.max(0, _now - QUARTER_START);
+  const TODAY_PCT     = Math.min(100, (_elapsedMs / (TOTAL_WEEKS * MS_PER_WEEK)) * 100);
+  const _currentWeek  = _elapsedMs <= 0 ? 0 : Math.min(TOTAL_WEEKS, Math.floor(_elapsedMs / MS_PER_WEEK) + 1);
+  const _weeksElapsed = _currentWeek;
+
+  // Populate dynamic UI elements
+  document.getElementById('weeksElapsedVal').textContent = _weeksElapsed || '-';
+  const _monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  document.getElementById('legendTodayText').textContent =
+    `Today · ${_now.getDate()} ${_monthNames[_now.getMonth()]}`;
 
   const PHASES = {
     scoping:        { label: 'Scoping',        color: '#58a6ff' },
@@ -580,26 +623,17 @@
 
   // Weeks: 12 total, 4 per month
   const WEEKS = [
-    { label: '7 Apr',  today: true  },
-    { label: '14 Apr', today: false },
-    { label: '21 Apr', today: false },
-    { label: '28 Apr', today: false },
-    { label: '5 May',  today: false },
-    { label: '12 May', today: false },
-    { label: '19 May', today: false },
-    { label: '26 May', today: false },
-    { label: '2 Jun',  today: false },
-    { label: '9 Jun',  today: false },
-    { label: '16 Jun', today: false },
-    { label: '23 Jun', today: false },
-  ];
+    '7 Apr','14 Apr','21 Apr','28 Apr',
+    '5 May','12 May','19 May','26 May',
+    '2 Jun','9 Jun','16 Jun','23 Jun',
+  ].map((label, i) => ({ label, today: (i + 1) === _currentWeek }));
 
   const THEMES = [
     {
       number: 'Theme 1',
       name: 'WYSIWYG',
       owners: 'Harry Pegrum · Damon Kreft',
-      description: 'Introducing the WYSIWYG editor into campaign creation — starting with visual editing and moving towards prompt-based changes, server-side decisioning and flexible goals. Customers are asking for the features they use in other tools; Q4 delivers that.',
+      description: 'Introducing the WYSIWYG editor into campaign creation - starting with visual editing and moving towards prompt-based changes, server-side decisioning and flexible goals. Customers are asking for the features they use in other tools; Q4 delivers that.',
       link: { label: 'View detailed epic forecast →', url: 'https://patrickch1999.github.io/Pages/wysiwyg_forecast.html' },
       initiatives: [
         { name: 'WYSIWYG MVP',                 detail: 'First iteration of our visual editor to reach meaningful feature completeness for non-developer users.' },
@@ -619,13 +653,13 @@
       number: 'Theme 2',
       name: 'Agentic Campaign Improvements',
       owners: 'Damian · Geoff · Tom',
-      description: 'Build on the Agentic Campaigns launch. Expand strategy options, surface the comparative value of agentic versus standard campaigns, and maintain a regular improvement cycle throughout Q4.',
+      description: 'Build on the Agentic Campaigns launch. Expand strategy options, surface the comparative value of agentic versus standard campaigns, and maintain a regular improvement cycle throughout Q4.\n\nCurrently in QA: Custom Strategy Builder · Control/Holdback Improvements · Standard Reporting Bug · Reporting Updates.',
       initiatives: [
         { name: 'Custom Strategy Builder · In QA', detail: 'Allows customers to build and save their own custom strategies for reuse across campaigns, beyond the six predefined options.' },
         { name: 'Biweekly Sprints',           detail: 'Dedicated capacity every two weeks to address customer-reported issues and feedback on Agentic Campaigns throughout Q4.' },
         { name: 'Notifications & Recommendations', detail: 'Notify customers when a campaign moves from Exploration to Optimisation phase. Surface a list of agent recommendations from the campaign overview.' },
         { name: 'Strategy Expansion',         detail: 'Adds more strategies to the existing library, giving customers a broader range of starting points and reducing the need to build from scratch.' },
-        { name: 'Agentic Value Reporting',    detail: 'Dedicated reporting on the performance differential between Agentic and standard campaigns — efficiency gains, uplift comparison, and revenue contribution.' },
+        { name: 'Agentic Value Reporting',    detail: 'Dedicated reporting on the performance differential between Agentic and standard campaigns - efficiency gains, uplift comparison, and revenue contribution.' },
       ],
       sprints: [
         { label: 'Sprint 1', start: 1,  end: 2  },
@@ -643,23 +677,25 @@
       description: 'A structured retraining cycle with a clear goal: make the model more commercially useful, not just marginally more accurate. Three parallel workstreams, each with a distinct strategic outcome. The training dataset is largely prepared.',
       workstreams: [
         { label: 'New Feature Inputs',        start: 1, end: 12, color: '#60a5fa', detail: 'Adds three new signals: site performance (page speed, TTFB), social proof percentile, and a bot detection metric replacing the deprecated XP signal. Bot detection classifies human vs bot/crawler traffic in real time.' },
-        { label: 'Generic Engagement Model',  start: 1, end: 12, color: '#818cf8', detail: 'Explores a vertical-agnostic model trained on engagement signals (scroll, click, dwell, session progression) rather than conversion events — to serve non-eCommerce verticals such as publishing, property and SaaS.' },
-        { label: 'Bespoke Client Models',     start: 1, end: 12, color: '#a78bfa', detail: 'Infrastructure to offer enterprise clients a model fine-tuned on their own data as an MRR add-on (~£3–5k/month). The base model is ~5MB — hundreds of client variants can sit in the inference system at negligible cost.' },
+        { label: 'Generic Engagement Model',  start: 1, end: 12, color: '#818cf8', detail: 'Explores a vertical-agnostic model trained on engagement signals (scroll, click, dwell, session progression) rather than conversion events - to serve non-eCommerce verticals such as publishing, property and SaaS.' },
+        { label: 'Bespoke Client Models',     start: 1, end: 12, color: '#a78bfa', detail: 'Infrastructure to offer enterprise clients a model fine-tuned on their own data as an MRR add-on (~£3–5k/month). The base model is ~5MB - hundreds of client variants can sit in the inference system at negligible cost.' },
       ]
     },
     {
       number: 'Theme 4',
-      name: 'Metabase Integration',
-      owners: 'Mat · Damian',
-      description: 'Establish Metabase as a deeply linked analytics layer accessible from key points across the product. The engineering work is close to ready; the outstanding risk is definitional — dashboards cannot ship empty, and defining what the reports should contain has not yet been completed.',
+      name: 'Native Insights',
+      locked: true,
+      lockLabel: 'Timelines TBC',
+      owners: 'Mat · Tom',
+      description: 'Following the decision to decommission Metabase from the product frontend, this theme covers the pivot to native in-product analytics views - fixed, framed dashboards that answer specific customer questions rather than open-ended data access. Starting with a returning visits strategy page, views will be tied directly to agentic strategy pages and shipped progressively based on validated customer questions.',
       initiatives: [
-        { name: 'Metabase Deep Links',         detail: 'From any segment in the library, one click to a Metabase report scoped to that segment. No manual reconfiguration. This is the primary Q4 deliverable for this theme.' },
-        { name: 'Campaign → Metabase Deep Dive', detail: 'A \'View full breakdown in Metabase\' entry point from campaign reporting, linking directly to a pre-scoped campaign dashboard.' },
-        { name: 'Metabase Validation',         detail: 'With Metabase live for internal users, Q4 validates which data and dashboard formats are most valuable before opening to customers. Co-building with a small group to test assumptions.' },
-        { name: 'Gating (Paid Tier)',          detail: 'Every user who views a Metabase component counts against the licence at $10/user/month. The group aligned on gating embedded Metabase behind a paid tier rather than making it universally available.' },
+        { name: 'Decommission Metabase',           detail: 'Remove Metabase from the product stack entirely. Retain the internal BI instance for team use only, eliminating licensing cost and external dependency on Metabase release cycles.' },
+        { name: 'Strategy Insights Scoping (6 May)', detail: 'Collaborative session to identify 3–5 core customer questions to answer from the returning visits strategy. Confirm data availability and agree the view structure with Tom before any build begins.' },
+        { name: 'Returning Visits Strategy Page',  detail: 'First native insights view, surfacing affinity data tied directly to the returning visits agentic strategy. Includes one-click actions to build segments and campaigns from the data presented.' },
+        { name: 'Affinity Reporting View',         detail: 'Fixed dashboard answering "what affinities are my customers returning with?" - framed explicitly around homepage personalisation actions rather than raw data exploration.' },
       ],
       phases: [
-        { type: 'scoping',        start: 1, end: 4,  risk: true, label: '⚠ Scoping' },
+        { type: 'scoping',        start: 1, end: 4,  label: 'Scoping & Decommission' },
         { type: 'implementation', start: 5, end: 9  },
         { type: 'testing',        start: 9, end: 11 },
         { type: 'rollout',        start: 11, end: 12 },
@@ -672,7 +708,7 @@
       description: 'Deliver the updated product UI by end of Q4 to provide the visual and architectural foundation for everything that follows in 2026. Hard target: new UI shipped and accessible to customers by end of June. This is the enabling dependency for the broader 2026 roadmap.',
       initiatives: [
         { name: 'Component Library Refresh',   detail: 'Updated typography scale, refined component set and improved colour system. Provides a scalable front-end foundation and a more polished product feel throughout.' },
-        { name: 'Value Visibility Surfaces',   detail: 'Revenue attributed to intent, campaign uplift and time saved through Agentic Campaigns surfaced throughout the product — reinforcing ROI without requiring customers to seek it out.' },
+        { name: 'Value Visibility Surfaces',   detail: 'Revenue attributed to intent, campaign uplift and time saved through Agentic Campaigns surfaced throughout the product - reinforcing ROI without requiring customers to seek it out.' },
         { name: 'Terminology & Copy Audit',    detail: 'Product-wide review of labels, tooltips and empty states. Replace technical or ambiguous language with clear, customer-facing copy. Documented as a living style guide.' },
         { name: 'In-product Help',             detail: 'Contextual help tooltips and inline explainers at key decision points throughout the product.' },
         { name: 'Metabase Access Points',      detail: 'Design and implement the surfaces within the new UI through which Metabase will be accessed, including entry points from campaign reporting and segment library views. Gating logic scoped here for Q1.' },
@@ -689,13 +725,13 @@
       number: 'Theme 6',
       name: 'MCP Exploration',
       owners: 'Joe',
-      description: 'Build out the MWI MCP server, enabling customers to query their Intent Insights data in natural language via Claude or any compatible AI agent — without navigating the dashboard. An MCP server is already deployed on AWS with auth, RBAC and property-level access controls.',
+      description: 'Build out the MWI MCP server, enabling customers to query their Intent Insights data in natural language via Claude or any compatible AI agent - without navigating the dashboard. An MCP server is already deployed on AWS with auth, RBAC and property-level access controls.',
       initiatives: [
         { name: 'Account Summary',             detail: 'Health-check and performance snapshot. Rolling 7-day vs prior 7-day comparison across intent stage volumes, campaign health, data quality and a plain-English agent summary.' },
-        { name: 'Campaign Overview',           detail: 'Status and performance across all campaigns — live/draft/paused counts, Agentic vs Standard split, performance direction and confidence per live campaign. Flags campaigns warranting action.' },
+        { name: 'Campaign Overview',           detail: 'Status and performance across all campaigns - live/draft/paused counts, Agentic vs Standard split, performance direction and confidence per live campaign. Flags campaigns warranting action.' },
         { name: 'Standard Campaign Summary',   detail: 'Detailed report for a named campaign: global and segment-level CVR, RPU and uplift vs control with statistical confidence callout. Matches the in-app report format.' },
         { name: 'Agentic Campaign Summary',    detail: 'Phase, segment win/loss counts, estimated uplift trend, days to confidence threshold and an agent interpretation of campaign health.' },
-        { name: 'P1: Weekly Trade Report',     detail: 'Pre-formatted intent summary for eCommerce trade meetings — intent stage breakdown, top 5 affinity movers, performance by marketing channel and landing page type, week-on-week.' },
+        { name: 'P1: Weekly Trade Report',     detail: 'Pre-formatted intent summary for eCommerce trade meetings - intent stage breakdown, top 5 affinity movers, performance by marketing channel and landing page type, week-on-week.' },
       ],
       phases: [
         { type: 'scoping',        start: 5,  end: 6  },
@@ -828,7 +864,21 @@
     }
 
     block.appendChild(meta);
-    block.appendChild(panel);
+
+    if (theme.locked) {
+      const lockedWrapper = document.createElement('div');
+      lockedWrapper.className = 'gantt-locked-wrapper';
+      lockedWrapper.style.position = 'relative';
+      lockedWrapper.style.flex = '1';
+      lockedWrapper.appendChild(panel);
+      const overlay = document.createElement('div');
+      overlay.className = 'locked-overlay';
+      overlay.innerHTML = `<div class="locked-icon">🔒</div><div class="locked-label">${theme.lockLabel || 'Timelines coming soon'}</div>`;
+      lockedWrapper.appendChild(overlay);
+      block.appendChild(lockedWrapper);
+    } else {
+      block.appendChild(panel);
+    }
 
     // ── Expand panel ──
     const expandPanel = document.createElement('div');
