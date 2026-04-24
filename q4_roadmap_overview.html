@@ -329,7 +329,7 @@
   /* ── Sprint blocks ── */
   .sprint-row {
     position: relative;
-    height: 26px;
+    height: 34px;
     z-index: 1;
     margin: 4px 0;
   }
@@ -639,9 +639,9 @@
         { type: 'scoping',        start: 1, end: 1,  done: true },
         { type: 'implementation', start: 1, end: 2,  label: 'Core Editor' },
         { type: 'implementation', start: 1, end: 2,  label: 'New Templates' },
-        { type: 'implementation', start: 3, end: 4,  label: 'Template Integration' },
-        { type: 'implementation', start: 3, end: 4,  label: 'New UI' },
-        { type: 'testing',        start: 5, end: 6  },
+        { type: 'implementation', start: 3,   end: 3.5, label: 'Template Integration' },
+        { type: 'implementation', start: 4.5,  end: 4.75, label: 'New UI' },
+        { type: 'testing',        start: 5, end: 6    },
         { type: 'rollout',        start: 7, end: 8,  label: 'Beta Rollout' },
       ]
     },
@@ -675,9 +675,9 @@
       owners: 'Tom',
       description: 'A structured retraining cycle with a clear goal: make the model more commercially useful, not just marginally more accurate. Three parallel workstreams, each with a distinct strategic outcome. The training dataset is largely prepared.',
       workstreams: [
-        { label: 'New Feature Inputs',        start: 1, end: 12, color: '#60a5fa', detail: 'Adds three new signals: site performance (page speed, TTFB), social proof percentile, and a bot detection metric replacing the deprecated XP signal. Bot detection classifies human vs bot/crawler traffic in real time.' },
-        { label: 'Generic Engagement Model',  start: 1, end: 12, color: '#818cf8', detail: 'Explores a vertical-agnostic model trained on engagement signals (scroll, click, dwell, session progression) rather than conversion events - to serve non-eCommerce verticals such as publishing, property and SaaS.' },
-        { label: 'Bespoke Client Models',     start: 1, end: 12, color: '#a78bfa', detail: 'Infrastructure to offer enterprise clients a model fine-tuned on their own data as an MRR add-on (~£3-5k/month). The base model is ~5MB - hundreds of client variants can sit in the inference system at negligible cost.' },
+        { label: 'New Feature Inputs',        start: 5, end: 12, color: '#60a5fa', detail: 'Adds three new signals: site performance (page speed, TTFB), social proof percentile, and a bot detection metric replacing the deprecated XP signal. Bot detection classifies human vs bot/crawler traffic in real time.' },
+        { label: 'Generic Engagement Model',  start: 5, end: 12, color: '#818cf8', detail: 'Explores a vertical-agnostic model trained on engagement signals (scroll, click, dwell, session progression) rather than conversion events - to serve non-eCommerce verticals such as publishing, property and SaaS.' },
+        { label: 'Bespoke Client Models',     start: 5, end: 12, color: '#a78bfa', detail: 'Infrastructure to offer enterprise clients a model fine-tuned on their own data as an MRR add-on (~£3-5k/month). The base model is ~5MB - hundreds of client variants can sit in the inference system at negligible cost.' },
       ]
     },
     {
