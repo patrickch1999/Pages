@@ -357,8 +357,8 @@
   /* ── Hover: fade sibling themes ── */
   .theme-block { cursor: pointer; }
   .theme-wrapper { transition: opacity 0.2s ease; }
-  #themeRows:has(.theme-wrapper:hover) .theme-wrapper       { opacity: 0.2; }
-  #themeRows:has(.theme-wrapper:hover) .theme-wrapper:hover { opacity: 1; }
+  #themeRows:has(.theme-wrapper:hover) .theme-wrapper       { opacity: 0.45; }
+  #themeRows:has(.theme-wrapper:hover) .theme-wrapper:hover { opacity: 1; outline: 1px solid #58a6ff; outline-offset: -1px; }
 
   /* ── Expand arrow ── */
   .expand-arrow {
@@ -502,7 +502,7 @@
 <!-- ── Page header ── -->
 <div class="page-header">
   <h1>Q4 2026 Product Roadmap - Theme Overview</h1>
-  <p>April – June 2026 &nbsp;·&nbsp; Theme: Refinement, Polish and Maturity &nbsp;·&nbsp; Run date: 9 Apr 2026</p>
+  <p>April - June 2026 &nbsp;·&nbsp; Theme: Refinement, Polish and Maturity &nbsp;·&nbsp; Run date: 9 Apr 2026</p>
 </div>
 
 <!-- ── Stat strip ── -->
@@ -515,14 +515,14 @@
   <div class="stat">
     <div class="stat-label">Quarter</div>
     <div class="stat-value" style="color:var(--text)">Q4</div>
-    <div class="stat-sub">Apr – Jun 2026</div>
+    <div class="stat-sub">Apr - Jun 2026</div>
   </div>
   <div class="stat">
     <div class="stat-label">Weeks elapsed</div>
     <div class="stat-value" style="color:var(--today)" id="weeksElapsedVal">-</div>
     <div class="stat-sub">of 12 total</div>
   </div>
-<div class="stat">
+  <div class="stat">
     <div class="stat-label">Key owners</div>
     <div class="stat-value" style="color:var(--text); font-size:15px">8</div>
     <div class="stat-sub">Across all themes</div>
@@ -591,7 +591,7 @@
 
 <script>
   // ── Config ──────────────────────────────────────────────────────────────
-  // Quarter: 12 weeks, Apr 7 – Jun 27 2026
+  // Quarter: 12 weeks, Apr 7 - Jun 27 2026
   const QUARTER_START = new Date(2026, 3, 7); // Apr 7 2026
   const MS_PER_WEEK   = 7 * 24 * 60 * 60 * 1000;
   const TOTAL_WEEKS   = 12;
@@ -677,7 +677,7 @@
       workstreams: [
         { label: 'New Feature Inputs',        start: 1, end: 12, color: '#60a5fa', detail: 'Adds three new signals: site performance (page speed, TTFB), social proof percentile, and a bot detection metric replacing the deprecated XP signal. Bot detection classifies human vs bot/crawler traffic in real time.' },
         { label: 'Generic Engagement Model',  start: 1, end: 12, color: '#818cf8', detail: 'Explores a vertical-agnostic model trained on engagement signals (scroll, click, dwell, session progression) rather than conversion events - to serve non-eCommerce verticals such as publishing, property and SaaS.' },
-        { label: 'Bespoke Client Models',     start: 1, end: 12, color: '#a78bfa', detail: 'Infrastructure to offer enterprise clients a model fine-tuned on their own data as an MRR add-on (~£3–5k/month). The base model is ~5MB - hundreds of client variants can sit in the inference system at negligible cost.' },
+        { label: 'Bespoke Client Models',     start: 1, end: 12, color: '#a78bfa', detail: 'Infrastructure to offer enterprise clients a model fine-tuned on their own data as an MRR add-on (~£3-5k/month). The base model is ~5MB - hundreds of client variants can sit in the inference system at negligible cost.' },
       ]
     },
     {
@@ -688,10 +688,10 @@
       owners: 'Mat · Tom',
       description: 'Following the decision to decommission Metabase from the product frontend, this theme covers the pivot to native in-product analytics views - fixed, framed dashboards that answer specific customer questions rather than open-ended data access. Starting with a returning visits strategy page, views will be tied directly to agentic strategy pages and shipped progressively based on validated customer questions.',
       initiatives: [
-        { name: 'Decommission Metabase',           detail: 'Remove Metabase from the product stack entirely. Retain the internal BI instance for team use only, eliminating licensing cost and external dependency on Metabase release cycles.' },
-        { name: 'Strategy Insights Scoping (6 May)', detail: 'Collaborative session to identify 3–5 core customer questions to answer from the returning visits strategy. Confirm data availability and agree the view structure with Tom before any build begins.' },
-        { name: 'Returning Visits Strategy Page',  detail: 'First native insights view, surfacing affinity data tied directly to the returning visits agentic strategy. Includes one-click actions to build segments and campaigns from the data presented.' },
-        { name: 'Affinity Reporting View',         detail: 'Fixed dashboard answering "what affinities are my customers returning with?" - framed explicitly around homepage personalisation actions rather than raw data exploration.' },
+        { name: 'Decommission Metabase',             detail: 'Remove Metabase from the product stack entirely. Retain the internal BI instance for team use only, eliminating licensing cost and external dependency on Metabase release cycles.' },
+        { name: 'Strategy Insights Scoping (6 May)', detail: 'Collaborative session to identify 3-5 core customer questions to answer from the returning visits strategy. Confirm data availability and agree the view structure with Tom before any build begins.' },
+        { name: 'Returning Visits Strategy Page',    detail: 'First native insights view, surfacing affinity data tied directly to the returning visits agentic strategy. Includes one-click actions to build segments and campaigns from the data presented.' },
+        { name: 'Affinity Reporting View',           detail: 'Fixed dashboard answering "what affinities are my customers returning with?" - framed explicitly around homepage personalisation actions rather than raw data exploration.' },
       ],
       phases: [
         { type: 'scoping',        start: 1, end: 4,  label: 'Scoping & Decommission' },
@@ -715,9 +715,8 @@
       phases: [
         { type: 'design',         start: 1,  end: 4  },
         { type: 'scoping',        start: 4,  end: 5  },
-        { type: 'implementation', start: 6,  end: 10 },
-        { type: 'testing',        start: 8,  end: 11 },
-        { type: 'rollout',        start: 11, end: 12 },
+        { type: 'implementation', start: 6,  end: 12 },
+        { type: 'testing',        start: 11, end: 12 },
       ]
     },
     {
@@ -754,14 +753,12 @@
   const container = document.getElementById('themeRows');
 
   THEMES.forEach(theme => {
-    // Wrapper holds the visible row + the collapsible expand panel
     const wrapper = document.createElement('div');
     wrapper.className = 'theme-wrapper';
 
     const block = document.createElement('div');
     block.className = 'theme-block';
 
-    // Left meta column
     const meta = document.createElement('div');
     meta.className = 'theme-meta';
     meta.innerHTML = `
@@ -771,7 +768,6 @@
       <div class="expand-arrow">▼</div>
     `;
 
-    // Gantt panel
     const panel = document.createElement('div');
     panel.className = 'gantt-panel';
 
@@ -781,7 +777,6 @@
     todayLine.innerHTML = '<div class="today-dot"></div>';
     panel.appendChild(todayLine);
 
-    // ── Render bars based on theme type ──
     if (theme.sprints) {
       const sprintRow = document.createElement('div');
       sprintRow.className = 'sprint-row';
@@ -909,7 +904,6 @@
       expandRight.appendChild(a);
     }
 
-    // Support both initiatives array and workstream detail
     const items = theme.initiatives
       || (theme.workstreams || []).map(w => ({ name: w.label, detail: w.detail }));
 
@@ -943,7 +937,6 @@
     inner.appendChild(expandRight);
     expandPanel.appendChild(inner);
 
-    // Toggle on click
     block.addEventListener('click', () => {
       const isOpen = expandPanel.classList.toggle('open');
       block.classList.toggle('is-expanded', isOpen);
