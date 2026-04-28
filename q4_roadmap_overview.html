@@ -639,10 +639,10 @@
         { type: 'scoping',        start: 1, end: 1,  done: true },
         { type: 'implementation', start: 1, end: 2,  label: 'Core Editor' },
         { type: 'implementation', start: 1, end: 2,  label: 'New Templates' },
-        { type: 'implementation', start: 3,   end: 3.5, label: 'Template Integration' },
-        { type: 'implementation', start: 4.5,  end: 4.75, label: 'New UI' },
-        { type: 'testing',        start: 5, end: 6    },
-        { type: 'rollout',        start: 7, end: 8,  label: 'Beta Rollout' },
+        { type: 'implementation', start: 3,   end: 4.5,  label: 'Template Integration' },
+        { type: 'implementation', start: 5.5, end: 5.75, label: 'New UI' },
+        { type: 'testing',        start: 6.5, end: 6.5  },
+        { type: 'rollout',        start: 7.5, end: 8,   label: 'Beta Rollout' },
       ]
     },
     {
@@ -715,8 +715,9 @@
         { name: 'Metabase Access Points',      detail: 'Design and implement the surfaces within the new UI through which Metabase will be accessed, including entry points from campaign reporting and segment library views. Gating logic scoped here for Q1.' },
       ],
       phases: [
-        { type: 'design',         start: 1,  end: 4  },
-        { type: 'scoping',        start: 4,  end: 5  },
+        { type: 'design',         start: 1,  end: 4,  label: 'Design' },
+        { type: 'design',         start: 4,  end: 5,  label: 'Design Feedback' },
+        { type: 'scoping',        start: 5,  end: 6  },
         { type: 'implementation', start: 6,  end: 12 },
         { type: 'testing',        start: 11, end: 12 },
       ]
