@@ -1,5 +1,5 @@
 {
-  "run_date": "2026-04-27",
+  "run_date": "2026-04-28",
   "tasks": {
     "MWIP-886": {
       "summary": "Implement JWT-based authentication via new ID/MFA service",
@@ -46,7 +46,7 @@
     "MWIP-967": {
       "summary": "Change management of elements",
       "assignee": "Harry Pegrum",
-      "status": "In Progress",
+      "status": "In Review",
       "estimate_secs": 230400
     },
     "MWIP-968": {
