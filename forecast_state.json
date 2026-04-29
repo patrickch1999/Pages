@@ -1,5 +1,5 @@
 {
-  "run_date": "2026-04-28",
+  "run_date": "2026-04-29",
   "tasks": {
     "MWIP-886": {
       "summary": "Implement JWT-based authentication via new ID/MFA service",
@@ -136,7 +136,7 @@
     "MWIP-1007": {
       "summary": "iframe Widget form rendering process",
       "assignee": "Damon Kreft",
-      "status": "Backlog",
+      "status": "In Progress",
       "estimate_secs": 28800
     },
     "MWIP-1008": {
