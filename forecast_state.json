@@ -1,5 +1,5 @@
 {
-  "run_date": "2026-04-29",
+  "run_date": "2026-04-30",
   "tasks": {
     "MWIP-886": {
       "summary": "Implement JWT-based authentication via new ID/MFA service",
@@ -52,7 +52,7 @@
     "MWIP-968": {
       "summary": "Integrate widgets into editor shell",
       "assignee": "Harry Pegrum",
-      "status": "Backlog",
+      "status": "Next Up",
       "estimate_secs": 115200
     },
     "MWIP-969": {
@@ -118,7 +118,7 @@
     "MWIP-960": {
       "summary": "Extend Form Builder Framework's form element library",
       "assignee": "Damon Kreft",
-      "status": "In Review",
+      "status": "QA / UAT",
       "estimate_secs": 57600
     },
     "MWIP-961": {
@@ -130,7 +130,7 @@
     "MWIP-962": {
       "summary": "WYSIWYG Editor Component",
       "assignee": "Damon Kreft",
-      "status": "Backlog",
+      "status": "In Progress",
       "estimate_secs": 86400
     },
     "MWIP-1007": {
