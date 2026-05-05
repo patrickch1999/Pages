@@ -1,5 +1,5 @@
 {
-  "run_date": "2026-05-01",
+  "run_date": "2026-05-05",
   "tasks": {
     "MWIP-886": {
       "summary": "Implement JWT-based authentication via new ID/MFA service",
@@ -66,6 +66,12 @@
       "assignee": "Unassigned",
       "status": "Backlog",
       "estimate_secs": 144000
+    },
+    "MWIP-1014": {
+      "summary": "Update UI and UX of visual editor overlay",
+      "assignee": "Harry Pegrum",
+      "status": "Backlog",
+      "estimate_secs": 86400
     },
     "MWIP-952": {
       "summary": "New \"Template/Widget Library Management\" section in platform",
@@ -136,7 +142,7 @@
     "MWIP-1007": {
       "summary": "iframe Widget form rendering process",
       "assignee": "Damon Kreft",
-      "status": "In Progress",
+      "status": "In Review",
       "estimate_secs": 28800
     },
     "MWIP-1008": {
