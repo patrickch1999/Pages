@@ -1,5 +1,5 @@
 {
-  "run_date": "2026-05-11",
+  "run_date": "2026-05-12",
   "tasks": {
     "MWIP-886": {
       "summary": "Implement JWT-based authentication via new ID/MFA service",
@@ -52,7 +52,7 @@
     "MWIP-968": {
       "summary": "Integrate widgets into editor shell",
       "assignee": "Harry Pegrum",
-      "status": "In Progress",
+      "status": "In Review",
       "estimate_secs": 115200
     },
     "MWIP-969": {
@@ -136,7 +136,7 @@
     "MWIP-962": {
       "summary": "WYSIWYG Editor Component",
       "assignee": "Damon Kreft",
-      "status": "In Progress",
+      "status": "QA / UAT",
       "estimate_secs": 86400
     },
     "MWIP-1007": {
