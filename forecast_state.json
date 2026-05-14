@@ -1,5 +1,5 @@
 {
-  "run_date": "2026-05-13",
+  "run_date": "2026-05-14",
   "tasks": {
     "MWIP-886": {
       "summary": "Implement JWT-based authentication via new ID/MFA service",
@@ -52,7 +52,7 @@
     "MWIP-968": {
       "summary": "Integrate widgets into editor shell",
       "assignee": "Harry Pegrum",
-      "status": "In Review",
+      "status": "QA / UAT",
       "estimate_secs": 115200
     },
     "MWIP-969": {
@@ -70,7 +70,7 @@
     "MWIP-1014": {
       "summary": "Update visual editor UI",
       "assignee": "Harry Pegrum",
-      "status": "In Progress",
+      "status": "QA / UAT",
       "estimate_secs": 86400
     },
     "MWIP-952": {
@@ -142,7 +142,7 @@
     "MWIP-1007": {
       "summary": "iframe Widget form rendering process",
       "assignee": "Damon Kreft",
-      "status": "In Review",
+      "status": "QA / UAT",
       "estimate_secs": 28800
     },
     "MWIP-1008": {
@@ -153,8 +153,8 @@
     },
     "MWIP-971": {
       "summary": "Mechanism for editing live campaigns in \u201cdraft mode\u201d",
-      "assignee": "Unassigned",
-      "status": "Backlog",
+      "assignee": "Harry Pegrum",
+      "status": "Next Up",
       "estimate_secs": 115200
     }
   }
