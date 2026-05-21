@@ -1,5 +1,5 @@
 {
-  "run_date": "2026-05-20",
+  "run_date": "2026-05-21",
   "tasks": {
     "MWIP-886": {
       "summary": "Implement JWT-based authentication via new ID/MFA service",
@@ -76,7 +76,7 @@
     "MWIP-1035": {
       "summary": "Bug Fixes Part 1",
       "assignee": "Harry Pegrum",
-      "status": "In Progress",
+      "status": "QA / UAT",
       "estimate_secs": 57600
     },
     "MWIP-1036": {
@@ -84,6 +84,12 @@
       "assignee": "Harry Pegrum",
       "status": "QA / UAT",
       "estimate_secs": 3600
+    },
+    "MWIP-1040": {
+      "summary": "Update widget handling",
+      "assignee": "Harry Pegrum",
+      "status": "In Progress",
+      "estimate_secs": null
     },
     "MWIP-952": {
       "summary": "New \"Template/Widget Library Management\" section in platform",
@@ -166,7 +172,7 @@
     "MWIP-971": {
       "summary": "Mechanism for editing live campaigns in \u201cdraft mode\u201d",
       "assignee": "Harry Pegrum",
-      "status": "Next Up",
+      "status": "In Progress",
       "estimate_secs": 115200
     }
   }
