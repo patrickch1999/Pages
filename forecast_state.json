@@ -1,5 +1,5 @@
 {
-  "run_date": "2026-05-22",
+  "run_date": "2026-05-26",
   "tasks": {
     "MWIP-886": {
       "summary": "Implement JWT-based authentication via new ID/MFA service",
@@ -10,7 +10,7 @@
     "MWIP-887": {
       "summary": "Update tracking script to bootstrap editor runtime",
       "assignee": "Damian Dawber",
-      "status": "Ready for Development",
+      "status": "In Progress",
       "estimate_secs": 14400
     },
     "MWIP-888": {
@@ -88,7 +88,7 @@
     "MWIP-1040": {
       "summary": "Update widget handling",
       "assignee": "Harry Pegrum",
-      "status": "In Progress",
+      "status": "In Review",
       "estimate_secs": null
     },
     "MWIP-952": {
@@ -172,7 +172,7 @@
     "MWIP-971": {
       "summary": "Mechanism for editing live campaigns in \u201cdraft mode\u201d",
       "assignee": "Harry Pegrum",
-      "status": "Ready for Development",
+      "status": "In Progress",
       "estimate_secs": 115200
     }
   }
