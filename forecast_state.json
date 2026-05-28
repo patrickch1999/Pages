@@ -1,5 +1,5 @@
 {
-  "run_date": "2026-05-27",
+  "run_date": "2026-05-28",
   "tasks": {
     "MWIP-886": {
       "summary": "Implement JWT-based authentication via new ID/MFA service",
@@ -89,6 +89,18 @@
       "summary": "Update widget handling",
       "assignee": "Harry Pegrum",
       "status": "In Progress",
+      "estimate_secs": null
+    },
+    "MWIP-1058": {
+      "summary": "Help Drawer",
+      "assignee": "Harry Pegrum",
+      "status": "In Review",
+      "estimate_secs": 14400
+    },
+    "MWIP-1059": {
+      "summary": "UX Update",
+      "assignee": "Harry Pegrum",
+      "status": "Backlog",
       "estimate_secs": null
     },
     "MWIP-952": {
