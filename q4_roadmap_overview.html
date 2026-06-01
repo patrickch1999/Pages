@@ -586,8 +586,7 @@
 </div>
 
 <footer>
-  Generated: Monday 1 June 2026 &nbsp;·&nbsp; Phase progress reflects current estimates based on Jira / Notion data &nbsp;·&nbsp; For detail on Visual Editor epic, see the Epic Forecast
-</footer>
+  Generated: Monday 1 June 2026 &nbsp;·&nbsp; Phase progress reflects current estimates based on Jira / Notion data </footer>
 
 <script>
   // ── Config ──────────────────────────────────────────────────────────────
@@ -628,12 +627,14 @@
       number: 'Theme 1',
       name: 'Visual Editor',
       owners: 'Harry Pegrum · Damon Kreft',
-      description: 'Introducing the Visual Editor editor into campaign creation - starting with visual editing and moving towards prompt-based changes, server-side decisioning and flexible goals. Customers are asking for the features they use in other tools; Q4 delivers that.',
-      link: { label: 'View detailed epic forecast →', url: 'https://patrickch1999.github.io/Pages/visual-editor_forecast.html' },
+      description: 'The Visual Editor lets campaign builders make and preview in-page changes directly on their live site - no CSS selectors, no developer tickets. Pick any element with a click, rewrite copy, change styling, hide what isn\'t working, and drop in pre-built widgets like countdown banners, promo banners and modals. Nothing goes live until you save.',
       initiatives: [
-        { name: 'Visual Editor MVP',                 detail: 'First iteration of our visual editor to reach meaningful feature completeness for non-developer users.' },
-        { name: 'Prompt-Based Editing',        detail: 'Exploring 3rd party tech (CODI) to provide a proof of concept for prompt-based development directly within the editor.' },
-        { name: 'Mobile Preview & QR Code',   detail: 'Resize preview to mobile dimensions and generate a QR code for on-device testing. Driven by direct customer feedback.' },
+        { name: 'Select & Edit Elements',     detail: 'Click any element on the live page to select it - text edits, style changes (font, colour, size), hide, or jump to it in the element tree. Breadcrumb confirms exactly what\'s selected. Changes are visible in context immediately.' },
+        { name: 'Element Tree',               detail: 'Structural view of the full page (body, headers, hero, footer) with expand, click-to-select, and search by tag or class. Useful when elements are overlapped or you need to select a parent rather than a child.' },
+        { name: 'Widget Gallery',             detail: 'Drop in pre-built components without writing code: countdown banners, promo banners, positioning widgets (modals, sticky banners, overlays, tooltips), and form layouts. Each has its own config panel for copy, dates, CTAs and styling.' },
+        { name: 'Variant & Audience Scoping', detail: 'Any experience can have multiple variants, each scoped to a different audience. Add, rename, switch between, or delete variants from the dropdown. Changes in one variant don\'t affect others.' },
+        { name: 'Mobile Preview',             detail: 'Toggle between desktop and mobile to see how the experience reflows at different breakpoints. Rotate to landscape and flip into preview mode to view the page without editor chrome.' },
+        { name: 'Chrome Extension Build',     detail: 'The Visual Editor runs via a Chrome extension, enabling in-situ editing on the live site. The extension build covers installation, auth, site injection and the editor scaffold.' },
       ],
       phases: [
         { type: 'scoping',        start: 1, end: 3,  done: true },
