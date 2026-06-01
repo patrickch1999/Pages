@@ -686,7 +686,15 @@
       number: 'Theme 4',
       name: 'Platform Simplification',
       owners: 'Bec · Damon · Harry',
-      description: 'Simplify and streamline the product platform to reduce complexity and improve the experience for customers and the team.',
+      description: 'Phase 1 of the Seeing Value strategy. Strip friction out of the MWI product by making agentic campaigns the centre of gravity and retiring segments, custom campaigns and standalone insights. The new simplified platform will be built on a separate domain, allowing both platforms to run concurrently. Current platform feature freeze mid-June; simplified platform targeted for completion late August / September 2026.',
+      initiatives: [
+        { name: 'Retire Segments & Custom Campaigns', detail: 'Segments are no longer needed with Campaign Targeting in place. Custom campaigns are being sunset in favour of agentic-only. Existing customers continue on the current platform until migration (timing TBD).' },
+        { name: 'New Simplified Platform Build',      detail: 'Build the new platform on a separate domain with agentic at its core. Feature freeze on the current platform mid-June 2026. Simplified platform complete late August / September 2026. New customers onboarded to the new platform from September.' },
+        { name: 'New UI Design',                      detail: 'Design the UI for the simplified platform - cleaner, agentic-first, no segments or custom campaign surfaces. Provides the visual foundation for the Quickstart trial journey that follows.' },
+        { name: 'Storybook Component Library',        detail: 'Build out the component library in Storybook in parallel with design and architecture scoping. Provides a scalable, reusable front-end foundation for the new platform build.' },
+        { name: 'Architecture & Infra Scoping',       detail: 'Define the technical architecture for the new platform - separate domain, infra setup, feature flag strategy for running both platforms concurrently, and data isolation between trial and paid customers.' },
+        { name: 'Current Platform Simplification',    detail: 'Use feature flags to simplify the current platform ahead of migration - removing segments, custom campaigns and non-agentic insights from the UI for new customers onboarded June-September.' },
+      ],
       phases: [
         { type: 'scoping',        start: 4,  end: 6,  label: 'New UI Design' },
         { type: 'implementation', start: 7,  end: 8,  label: 'Interim Implementation' },
