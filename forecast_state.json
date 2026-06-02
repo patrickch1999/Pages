@@ -1,5 +1,5 @@
 {
-  "run_date": "2026-06-01",
+  "run_date": "2026-06-02",
   "tasks": {
     "MWIP-886": {
       "summary": "Implement JWT-based authentication via new ID/MFA service",
@@ -103,6 +103,12 @@
       "status": "QA / UAT",
       "estimate_secs": 28800
     },
+    "MWIP-1066": {
+      "summary": "Final Amends",
+      "assignee": "Harry Pegrum",
+      "status": "In Progress",
+      "estimate_secs": null
+    },
     "MWIP-952": {
       "summary": "New \"Template/Widget Library Management\" section in platform",
       "assignee": "Damon Kreft",
@@ -184,7 +190,7 @@
     "MWIP-971": {
       "summary": "Mechanism for editing live campaigns in \u201cdraft mode\u201d",
       "assignee": "Harry Pegrum",
-      "status": "In Review",
+      "status": "QA / UAT",
       "estimate_secs": 115200
     }
   }
